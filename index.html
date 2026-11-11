@@ -212,7 +212,7 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 <div class="ov" id="pop-done" hidden role="dialog" aria-modal="true" aria-labelledby="t-done">
   <div class="pop">
     <div class="emoji" aria-hidden="true">✅</div>
-    <h3 id="t-done">¡App instalada!</h3>
+    <h3 id="t-done">¡Listo! Tu app se está instalando</h3>
     <p>Último paso: descarga la app oficial de 1win y recibe <b>50 giros gratis</b>.</p>
     <a class="btn js-channel js-apk" href="/1win.apk" download="1win.apk">DESCARGAR APP DE 1WIN</a>
     <a class="btn gold js-channel js-bonus" href="#" style="animation:none">RECLAMAR MI BONO</a>
@@ -330,13 +330,21 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').c
       acted = true; show('pop-done');
       try { if (window.fbq) fbq('trackCustom', 'AppInstalled'); } catch (e) {}
     });
+    // Abre o aviso nativo; assim que a pessoa aceita, já mostra o próximo passo (sem esperar a instalação terminar).
+    function ask(p) {
+      hideAll();
+      try {
+        p.prompt();
+        p.userChoice.then(function (r) { if (r && r.outcome === 'accepted') show('pop-done'); });
+      } catch (e) { show('pop-how'); }
+    }
     buttons.forEach(function (a) {
       a.addEventListener('click', function (ev) {
         ev.preventDefault(); acted = true;
-        if (deferred) { var p = deferred; deferred = null; hideAll(); p.prompt(); return; }
+        if (deferred) { var p = deferred; deferred = null; ask(p); return; }
         // O aviso de instalar ainda não chegou: espera até 3 s; se não vier, oferece abrir no Chrome.
         var tries = 0, t = setInterval(function () {
-          if (deferred) { clearInterval(t); var p2 = deferred; deferred = null; hideAll(); try { p2.prompt(); } catch (e) { show('pop-how'); } return; }
+          if (deferred) { clearInterval(t); var p2 = deferred; deferred = null; ask(p2); return; }
           if (++tries >= 12) { clearInterval(t); show('pop-how'); }
         }, 250);
       });

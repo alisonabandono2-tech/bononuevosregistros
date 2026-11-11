@@ -15,7 +15,6 @@
 <meta name="theme-color" content="#07060d">
 <meta name="robots" content="noindex">
 <meta name="google" content="notranslate">
-<link rel="preconnect" href="https://1win-partners.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Manrope:wght@400;600&display=swap">
@@ -41,12 +40,12 @@ h1 em{font-style:normal;background:linear-gradient(90deg,var(--neon),var(--gold)
 .sub{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 4px}
 .chips span{padding:7px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:12px;font-weight:600}
-.btn{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:14px;padding:16px;border:0;border-radius:16px;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,var(--btn1),var(--btn2));color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:.02em;text-decoration:none;white-space:nowrap;box-shadow:0 14px 34px -8px rgba(23,212,106,.75),0 0 0 1px rgba(255,255,255,.25) inset;animation:pulse 1.5s ease-in-out infinite}
-.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:shine 2.4s infinite}
+.btn{--pc:23,212,106;position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;margin-top:14px;padding:16px;border:0;border-radius:16px;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,var(--btn1),var(--btn2));color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:.02em;text-decoration:none;white-space:nowrap;box-shadow:0 14px 34px -8px rgba(23,212,106,.75),0 0 0 1px rgba(255,255,255,.25) inset;animation:pulse 1.1s ease-in-out infinite}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:shine 1.5s infinite}
 @keyframes shine{60%,100%{left:130%}}
-@keyframes pulse{50%{transform:scale(1.03)}}
+@keyframes pulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--pc),.85),0 14px 34px -8px rgba(var(--pc),.8)}35%{transform:scale(1.075) rotate(-.6deg)}55%{transform:scale(1.03) rotate(.6deg)}75%{transform:scale(1.075);box-shadow:0 0 0 22px rgba(var(--pc),0),0 18px 50px -4px rgba(var(--pc),1)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(var(--pc),0),0 14px 34px -8px rgba(var(--pc),.8)}}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.btn.gold{background:linear-gradient(180deg,#FFD860,#F2A20C);color:#221500;box-shadow:0 14px 34px -8px rgba(255,200,61,.7),0 0 0 1px rgba(255,255,255,.4) inset}
+.btn.gold{--pc:255,200,61;background:linear-gradient(180deg,#FFD860,#F2A20C);color:#221500;box-shadow:0 14px 34px -8px rgba(255,200,61,.7),0 0 0 1px rgba(255,255,255,.4) inset}
 .micro{margin:10px 0 0;font-size:13px;color:var(--muted)}
 h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;text-align:center}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:s}
@@ -59,17 +58,16 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 
 /* ---- vitrine de jogos ---- */
 .rowhead{margin:6px 2px -4px;font-family:'Sora',sans-serif;font-weight:700;font-size:16px}
-.games{display:flex;gap:10px;margin:0 -16px;padding:4px 16px 10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-.games::-webkit-scrollbar{display:none}
-.shot.local{aspect-ratio:339/442}
-.shot{display:block;aspect-ratio:1080/1500;border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -28px rgba(11,123,255,.75)}
+.games{margin:0 -16px;overflow:hidden}
+.track{display:flex;gap:10px;width:max-content;padding:4px 0 10px;animation:marq 48s linear infinite}
+@keyframes marq{to{transform:translateX(calc(-50% - 5px))}}
+.shot{display:block;aspect-ratio:1080/1364;border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -28px rgba(11,123,255,.75)}
 .shot img,.card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
-.card{flex:1 1 0;min-width:0;aspect-ratio:4/3;border-radius:18px;overflow:hidden;scroll-snap-align:start;border:1px solid var(--line);box-shadow:0 16px 30px -16px rgba(0,0,0,.9)}
-.card img.bot{object-position:bottom}
+.card{flex:none;width:148px;aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
 .card:active{transform:scale(.97)}
 .emoji{display:none}
 /* telas baixas: tudo que importa cabe sem rolar */
-@media (max-height:780px){.appicon,.chips{display:none}.hero{padding:16px}.hero .badge{margin-bottom:12px}h1{font-size:25px}.sub{font-size:15px}.shot{border-radius:20px}.page{padding-top:14px;gap:12px}}
+@media (max-height:780px){.appicon,.chips{display:none}.hero{padding:16px}h1{font-size:25px}.sub{font-size:15px}.shot{border-radius:20px}.page{padding-top:14px;gap:12px}}
 @media (max-width:359px){h1{font-size:23px}.btn{font-size:16px}.card{width:200px}}
 /* barra fixa */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,transparent,rgba(7,6,13,.92) 35%);}
@@ -86,7 +84,7 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 .x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer}
 .link{display:inline-block;min-height:44px;margin-top:10px;padding:10px 14px;background:none;border:0;color:var(--muted);font:600 14px 'Manrope',sans-serif;text-decoration:underline;cursor:pointer}
 @media (min-width:600px){.ov{align-items:center}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.games{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -96,11 +94,10 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 <main class="page">
 
   <!-- CHAMARIZ: criativo oficial 1win (bônus +600% e 500 FS) -->
-  <a class="shot js-channel js-go" href="#"><img src="https://1win-partners.com/imgproxy/size_1280/promo-files-uploads/c065cebe70ef7d00f8fad828044965ed8304cd80911b59bde6.jpg" alt="Retira tus ganancias con un bono: +600% y 500 FS en los primeros depósitos" width="720" height="1280" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.parentNode.classList.add('local');this.src='/hero.jpg'"></a>
+  <a class="shot js-channel js-go" href="#"><img src="/hero.jpg" alt="Retira tus ganancias con un bono: +600% y 500 FS en los primeros depósitos" width="1080" height="1364" fetchpriority="high" decoding="async"></a>
 
   <!-- ANDROID (e padrão) -->
   <section class="hero" id="view-android">
-    <span class="badge">ACCESO SOLO DESDE LA APP</span>
     <img class="appicon" src="/icon-192.png" alt="" width="92" height="92">
     <h1>Instala la app <em>para continuar</em></h1>
     <p class="sub">Se instala en 5 segundos y no ocupa espacio en tu celular</p>
@@ -121,7 +118,6 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 
   <!-- IPHONE -->
   <section class="hero" id="view-ios" hidden>
-    <span class="badge">ACCESO SOLO DESDE LA APP</span>
     <img class="appicon" src="/icon-192.png" alt="" width="92" height="92">
     <h1>Agrégala a tu iPhone</h1>
     <p class="sub js-ios-sub">Toca el botón <b>Compartir</b> de Safari y elige <b>Agregar a inicio</b></p>
@@ -141,10 +137,34 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
     <p class="micro js-apk">Android: 50 giros gratis por instalar la app oficial</p>
   </section>
 
-  <p class="rowhead">Más en 1win</p>
+  <p class="rowhead">Más promociones</p>
   <div class="games">
-    <a class="card js-channel js-go" href="#"><img class="top" loading="lazy" src="https://1win-partners.com/imgproxy/size_768/promo-files-uploads/bfee896a30ce28a18979e12eca8c75fdf002280b8f102b7769.jpg" alt="Lucky Drive: un coche nuevo cada mes" width="768" height="768" onerror="this.parentNode.hidden=true"></a>
-    <a class="card js-channel js-go" href="#"><img class="bot" loading="lazy" src="https://1win-partners.com/imgproxy/size_768/promo-files-uploads/0a6963a82b2d227479783d975f6306534c8ec6e19cd60b2b56.jpg" alt="Gana la carrera en Speed & Cash" width="768" height="768" onerror="this.parentNode.hidden=true"></a>
+    <div class="track">
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/crypto600.jpg" alt="Bono del 600% en tus primeros depósitos" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/binary600.jpg" alt="Bono +600% en los primeros depósitos" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/usdt2000.jpg" alt="Bono de bienvenida 2000 USDT" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/plinko.jpg" alt="Gana el premio gordo en Plinko" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/speedcash.jpg" alt="Gana la carrera en Speed & Cash" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/luckydrive.jpg" alt="Lucky Drive: un coche nuevo cada mes" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/freebets.jpg" alt="Consigue un bono: freebets en deportes" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/formula1.jpg" alt="Fórmula 1: bono de bienvenida +600%" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/aviamasters.jpg" alt="Aviamasters: bono de +600%" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/aviatrix.jpg" alt="Aviatrix: bono del +600%" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/esports-freebets.jpg" alt="Esports: apuestas gratis" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#"><img loading="lazy" src="/promos/worlds.jpg" alt="Worlds 2026: apuesta gratis" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/crypto600.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/binary600.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/usdt2000.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/plinko.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/speedcash.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/luckydrive.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/freebets.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/formula1.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/aviamasters.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/aviatrix.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/esports-freebets.jpg" alt="" width="768" height="768"></a>
+      <a class="card js-channel js-go" href="#" aria-hidden="true" tabindex="-1"><img loading="lazy" src="/promos/worlds.jpg" alt="" width="768" height="768"></a>
+    </div>
   </div>
 
   <p class="small">Este sitio y su app son de un afiliado de 1win y te llevan al sitio oficial de 1win.</p>

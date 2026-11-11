@@ -1,6 +1,6 @@
 // Service worker mínimo: deixa o app instalável e abre mesmo com internet ruim.
-var CACHE = 'bono600-v5';
-var SHELL = ['/', '/manifest.webmanifest', '/icon-192.png'];
+var CACHE = 'bono600-v6';
+var SHELL = ['/', '/manifest.webmanifest', '/icon-192.png', '/hero.jpg'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); }));
 });

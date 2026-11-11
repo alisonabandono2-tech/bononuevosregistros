@@ -1,3 +1,7 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: strict-origin-when-cross-origin
 /sw.js
   Cache-Control: no-cache
 /manifest.webmanifest

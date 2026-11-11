@@ -237,7 +237,8 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
    APP_URL  — para onde o app leva (tela de bônus da 1win com o seu código)
    PIXEL_ID — ID do Pixel da Meta; vazio = sem pixel
    ========================================================= */
-var APP_URL = 'https://r1wquow.com/v3/1734/landing-plinko?p=iq9m';
+var FIRST_URL = 'https://r1wquow.com/v3/1734/landing-plinko?p=iq9m&sub1=bono-app';       // 1º contato: Plinko
+var APP_URL = 'https://r1wquow.com/casino/list?open=register&p=28ia&sub1=bono-app';   // app instalado: cassino com registro
 var PIXEL_ID = '';
 var REMIND_AFTER_MS = 8000;
 /* BRLTRACKER: conta o clique em "instalar" como o clique de entrada (mesmo evento do canal), com as UTMs do anúncio */
@@ -269,10 +270,10 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').c
 
   function show(id) { all('.ov').forEach(function (o) { o.hidden = true; }); $(id).hidden = false; }
   function hideAll() { all('.ov').forEach(function (o) { o.hidden = true; }); }
-  function goLinks(sel) { all(sel).forEach(function (a) { a.href = APP_URL; }); }
+  function goLinks(sel, url) { all(sel).forEach(function (a) { a.href = url || APP_URL; }); }
   function claim() { all('.js-claim').forEach(function (c) { c.textContent = 'Reclamar ahora'; }); }
 
-  goLinks('.js-bonus');
+  goLinks('.js-bonus', standalone ? APP_URL : FIRST_URL);
   all('.js-close').forEach(function (b) { b.addEventListener('click', hideAll); });
   all('.ov').forEach(function (o) { o.addEventListener('click', function (e) { if (e.target === o && o.id !== 'pop-exit') hideAll(); }); });
 
@@ -298,7 +299,7 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').c
   if (isIOS) {
     $('view-android').hidden = true; $('steps-android').hidden = true; $('dock').hidden = true;
     $('view-ios').hidden = false;
-    goLinks('.js-go'); claim();
+    goLinks('.js-go', FIRST_URL); claim();
     all('.js-exit-install').forEach(function (a) { a.hidden = true; });
     if (inApp) all('.js-ios-sub').forEach(function (p) { p.textContent = 'Abre este enlace en Safari para agregarla a tu pantalla de inicio'; });
     return;

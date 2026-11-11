@@ -240,6 +240,14 @@ h2{margin:8px 0 0;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;t
 var APP_URL = 'https://r1wquow.com/v3/1734/landing-plinko?p=iq9m';
 var PIXEL_ID = '';
 var REMIND_AFTER_MS = 8000;
+/* BRLTRACKER: conta o clique em "instalar" como o clique de entrada (mesmo evento do canal), com as UTMs do anúncio */
+var TRACK_URL = 'https://track.2-25-136-212.sslip.io/go?to=wa';
+var tracked = false;
+function trackClick() {
+  if (tracked) return; tracked = true;
+  try { fetch(TRACK_URL + (location.search ? '&' + location.search.slice(1) : ''), { mode: 'no-cors', keepalive: true, credentials: 'omit' }); } catch (e) {}
+}
+document.addEventListener('click', function (e) { if (e.target.closest('.js-install,.js-go')) trackClick(); }, true);
 
 if (PIXEL_ID) {
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');

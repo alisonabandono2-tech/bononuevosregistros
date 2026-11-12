@@ -243,12 +243,25 @@ var FIRST_URL = 'https://r1wquow.com/v3/1734/landing-plinko?p=iq9m&sub1=bono-app
 var APP_URL = 'https://r1wquow.com/casino/list?open=register&p=28ia&sub1=bono-app';   // app instalado: cassino com registro
 var PIXEL_ID = '2134108733860698';
 var REMIND_AFTER_MS = 8000;
-/* BRLTRACKER: conta o clique em "instalar" como o clique de entrada (mesmo evento do canal), com as UTMs do anúncio */
-var TRACK_URL = 'https://track.2-25-136-212.sslip.io/go?to=wa';
+/* BRLTRACKER: o clique em "instalar" cria um clique rastreado (com as UTMs do anúncio) e devolve um identificador.
+   Esse identificador vai no sub1 dos links da 1win, para o cadastro e o depósito voltarem ligados ao anúncio. */
+var TRACK_URL = 'https://track.2-25-136-212.sslip.io/r?to=app';
+function getCid() { try { return localStorage.getItem('cid') || ''; } catch (e) { return ''; } }
+function withCid(u) { var c = getCid(); return c ? u.replace(/sub1=[^&]*/, 'sub1=' + c) : u; }
+FIRST_URL = withCid(FIRST_URL); APP_URL = withCid(APP_URL);
 var tracked = false;
 function trackClick() {
-  if (tracked) return; tracked = true;
-  try { fetch(TRACK_URL + (location.search ? '&' + location.search.slice(1) : ''), { mode: 'no-cors', keepalive: true, credentials: 'omit' }); } catch (e) {}
+  if (tracked || getCid()) return; tracked = true;
+  var fbp = (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1] || '';
+  var u = TRACK_URL + '&href=' + encodeURIComponent(location.origin + location.pathname) + (fbp ? '&fbp=' + encodeURIComponent(fbp) : '') + (location.search ? '&' + location.search.slice(1) : '');
+  try {
+    fetch(u, { credentials: 'omit' }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j || !j.url || j.url.indexOf('cid:') !== 0) return;
+      try { localStorage.setItem('cid', j.url.slice(4)); } catch (e) {}
+      FIRST_URL = withCid(FIRST_URL); APP_URL = withCid(APP_URL);
+      Array.prototype.forEach.call(document.querySelectorAll('a[href*="sub1="]'), function (el) { el.href = withCid(el.href); });
+    }).catch(function () {});
+  } catch (e) {}
 }
 document.addEventListener('click', function (e) { if (e.target.closest('.js-install,.js-go')) trackClick(); }, true);
 
